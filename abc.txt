@@ -1,2 +1,3 @@
 #!/bin/bash
 echo "this is my 1st commit to test branch"
+echo "Hi paresh you are doing your 2nd commit"
