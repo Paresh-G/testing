@@ -1,4 +1,0 @@
-#!/bin/bash
-echo "this is my 3rd commit to test branch"
-echo "this is testing of poll scm"
-echo "Hi Hi Hi"
