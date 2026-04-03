@@ -1,7 +1,7 @@
 package com.example;
 
 /**
- * Hello Paresh Goenka!
+ * Hello Paresh Goenka, now build your 1st project!
  *
  */
 public class App 
