@@ -25,7 +25,7 @@ pipeline {
                   steps {
                       sh '''
                        #!/bin/bash
-                       sudo cp target/*.jar /opt/app/
+                       cp target/*.jar /opt/app/
                        pkill -f '.jar' || true
                        nohup java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 &'''
            }
