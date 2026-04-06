@@ -25,9 +25,9 @@ pipeline {
                   steps {
                       sh '''
                        #!/bin/bash
-                       sudo cp /var/lib/jenkins/workspace/my-01/target/my-demo-1.0-SNAPSHOT.jar
-                       pkill -f *.jar || true
-                       nohup java -jar /opt/app/target/*.jar > /opt/app/app.log 2>&1 &'''
+                       sudo cp target/*.jar /opt/app/
+                       pkill -f '.jar' || true
+                       nohup java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 &'''
            }
         }
     }
