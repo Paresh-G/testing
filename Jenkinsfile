@@ -21,12 +21,22 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+
+              stage('removing-oldjar') {
+                  steps {
+                      sh '''
+                       #!/bin/bash
+                       rm -f /opt/app/*.jar
+                       rm -f /opt/app/app.log '''
+           }
+        }
+        
               stage('copy-artifact-and-run-application') {
                   steps {
                       sh '''
                        #!/bin/bash
-                       sudo rm -rf /opt/app/*.jar
-                       sudo rm -rf /opt/app/app.log
+                       rm -f /opt/app/*.jar
+                       rm -f /opt/app/app.log
                        cp target/*.jar /opt/app/
                        java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 '''
            }
