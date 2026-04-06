@@ -21,5 +21,20 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+              stage('copy-artifact-and-run-application') {
+                  steps {
+                      sh '''# Optional: stop previous run if running
+#!/bin/bash
+
+sudo cp /var/lib/jenkins/workspace/my-01/target/my-demo-1.0-SNAPSHOT.jar
+
+
+pkill -f *.jar || true
+
+
+# Run JAR in background
+nohup java -jar /opt/app/target/*.jar > /opt/app/app.log 2>&1 &'''
+                  }
+              }
     }
 }
