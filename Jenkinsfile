@@ -22,6 +22,14 @@ pipeline {
             }
         }
 
+stage('artifact-repository') {
+    steps {
+        sh '''
+        aws s3 cp target/*.jar s3://sayli-paresh/my-demo-${BUILD_NUMBER}.jar
+        '''
+    }
+}
+
               stage('removing-oldjar') {
                   steps {
                       sh '''
@@ -35,8 +43,6 @@ pipeline {
                   steps {
                       sh '''
                        #!/bin/bash
-                       rm -f /opt/app/*.jar
-                       rm -f /opt/app/app.log
                        cp target/*.jar /opt/app/
                        java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 '''
            }
