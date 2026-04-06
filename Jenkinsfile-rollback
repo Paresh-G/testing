@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh '''cd /opt/app/
 
-                   temp=$(aws s3 ls s3://sayli-paresh/ | awk \'{print $4}\' | sort -t "-" -nk3|head -1)
+                   temp=$(aws s3 ls s3://sayli-paresh | awk '{print $4}' |sort -t "-" -nk3 |tail -2 |head -1)
                    echo "Latest build: $temp"
 
                    aws s3 cp s3://sayli-paresh/$temp /opt/app/app.jar
