@@ -16,33 +16,9 @@ pipeline {
             }
         }
         
-                stage('clean'){
+                stage('build'){
             steps {
-                sh "mvn clean"
-            }
-        }
-        
-        stage('build'){
-            steps {
-                sh "mvn validate"
-            }
-        }
-        
-                stage('compile'){
-            steps {
-                sh "mvn compile"
-            }
-        }
-        
-                stage('test'){
-            steps {
-                sh "mvn test"
-            }
-        }
-        
-                stage('package'){
-            steps {
-                sh "mvn package"
+                sh "mvn clean install"
             }
         }
     }
