@@ -25,6 +25,8 @@ pipeline {
                   steps {
                       sh '''
                        #!/bin/bash
+                       sudo rm -rf /opt/app/*.jar
+                       sudo rm -rf /opt/app/app.log
                        cp target/*.jar /opt/app/
                        java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 '''
            }
