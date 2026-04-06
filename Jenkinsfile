@@ -18,7 +18,7 @@ pipeline {
         
                 stage('build'){
             steps {
-                sh "mvn clean install"
+                sh "mvn clean package"
             }
         }
               stage('copy-artifact-and-run-application') {
@@ -26,8 +26,7 @@ pipeline {
                       sh '''
                        #!/bin/bash
                        cp target/*.jar /opt/app/
-                       pkill -f '.jar' || true
-                       nohup java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 &'''
+                       java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 '''
            }
         }
     }
