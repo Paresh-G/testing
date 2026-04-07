@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven-3.9.14'
-        jdk 'java-21'
+        jdk 'java-17'
     }
 
     stages {
@@ -22,30 +22,12 @@ pipeline {
             }
         }
 
-stage('artifact-repository') {
-    steps {
-        sh '''
-        aws s3 cp target/*.jar s3://sayli-paresh/my-demo-${BUILD_NUMBER}.jar
-        '''
-    }
-}
-
-              stage('removing-oldjar') {
-                  steps {
-                      sh '''
-                       #!/bin/bash
-                       rm -f /opt/app/*.jar
-                       rm -f /opt/app/app.log '''
-           }
-        }
-        
-              stage('copy-artifact-and-run-application') {
-                  steps {
-                      sh '''
-                       #!/bin/bash
-                       cp target/*.jar /opt/app/
-                       java -jar /opt/app/*.jar > /opt/app/app.log 2>&1 '''
-           }
-        }
+       stage('artifact-repository') {
+           steps {
+               sh '''
+                 aws s3 cp target/*.jar s3://sayli-paresh/my-demo-${BUILD_NUMBER}.jar
+              '''
+          }
+       }
     }
 }
