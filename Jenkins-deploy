@@ -18,7 +18,7 @@ pipeline {
         stage('Get latest artifact from S3') {
             steps {
                   sh '''
-                   temp=$(aws s3 ls s3://${S3_BUCKET} | awk '{print $4}' |sort -t "-" -nk4 |tail -1)
+                   temp=$(aws s3 ls s3://${S3_BUCKET} | awk '{print $4}' |sort -V |tail -1)
                    echo "Latest build: $temp"
                    '''
             }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh """
                    ssh ec2-user@172.31.5.98 '
-                   temp=\$(aws s3 ls s3://sayli-paresh | awk "{print \\\$4}" | sort -t "-" -nk4 | tail -1)
+                   temp=\$(aws s3 ls s3://sayli-paresh | awk "{print \\\$4}" | sort -V | tail -1)
                    aws s3 cp s3://sayli-paresh/\$temp /opt/app/app.jar
                    java -jar /opt/app/app.jar > /opt/app/app.log 2>&1 &
                   '
