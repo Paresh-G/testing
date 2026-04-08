@@ -22,18 +22,13 @@ pipeline {
             }
         }
 
-                        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                        sh """
-                          mvn sonar:sonar \
-                         -Dsonar.projectKey=maven-project \
-                         -Dsonar.host.url=http://52.66.109.101:9000 \
-                         -Dsonar.login=sqp_797027cace899304759e4e01ca652fe7ca55e22f
-                       """
-                }
-            }
-        }
+               stage('SonarQube Analysis') {
+                  steps {
+                      withSonarQubeEnv('sonar') {
+                         sh "mvn sonar:sonar -Dsonar.projectKey=maven-project"
+                      }
+                  }
+               }
 
         
        stage('artifact-repository') {
