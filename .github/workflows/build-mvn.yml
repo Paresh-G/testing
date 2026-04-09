@@ -9,20 +9,40 @@ jobs:
   build:
     runs-on: self-hosted
 
+
+  checkout:
+    runs-on: self-hosted
     steps:
-      # 1. Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
-        
-     # 2. Verify Java
-      - name: Check Java Version
-        run: java -
 
-      # 3. Build with Maven
+  check_java_version:
+    runs-on: self-hosted
+    steps:
+      - name: Check Java Version
+        run: java -version
+
+  package:
+    runs-on: self-hosted
+    steps:
       - name: Build Project
         run: mvn clean package
 
-      # 4. copy artifact to /opt/app
+  remove_old_artifact:
+    runs-on: self-hosted
+    steps:
+      - name: remove old artifact
+        run: sudo cd /opt/ && sudo rm -f *
+
+  deliver:
+    runs-on: self-hosted
+    steps:
       - name: delever artifact
-        run: sudo cp /target/*.jar /opt/
+        run: sudo cp /home/ubuntu/actions-runner/_work/testing/testing/target/*.jar /opt/my-app.jar
+
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: deploy artifact
+        run: sudo /opt/ && java -jar my-app.jar > app.log 2>&1 &
         
