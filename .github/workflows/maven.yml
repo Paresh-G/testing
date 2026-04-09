@@ -4,20 +4,20 @@ on: push
 
 jobs:
   stage1:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Stage 1 Echo
         run: echo "Hello from Stage 1"
 
   stage2:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: stage1
     steps:
       - name: Stage 2 Echo
         run: date
 
   stage3:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: stage2
     steps:
       - name: Stage 3 Echo
