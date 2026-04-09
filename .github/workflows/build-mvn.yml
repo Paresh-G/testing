@@ -6,9 +6,6 @@ on:
 
 
 jobs:
-  build:
-    runs-on: self-hosted
-
 
   checkout:
     runs-on: self-hosted
