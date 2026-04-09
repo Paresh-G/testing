@@ -46,5 +46,5 @@ jobs:
     needs: deliver
     steps:
       - name: deploy artifact
-        run:  cd /opt/ && sudo java -jar my-app.jar > app.log 2>&1 &
+        run:  sudo bash -c "java -jar /opt/my-app.jar > /opt/app.log 2>&1"
         
