@@ -18,30 +18,35 @@ jobs:
 
   check_java_version:
     runs-on: self-hosted
+    needs: checkout
     steps:
       - name: Check Java Version
         run: java -version
 
   package:
     runs-on: self-hosted
+    needs: check_java_version
     steps:
       - name: Build Project
         run: mvn clean package
 
   remove_old_artifact:
     runs-on: self-hosted
+    needs: package
     steps:
       - name: remove old artifact
         run: sudo cd /opt/ && sudo rm -f *
 
   deliver:
     runs-on: self-hosted
+    needs: remove_old_artifact
     steps:
       - name: delever artifact
         run: sudo cp /home/ubuntu/actions-runner/_work/testing/testing/target/*.jar /opt/my-app.jar
 
   deploy:
     runs-on: self-hosted
+    needs: deliver
     steps:
       - name: deploy artifact
         run: sudo /opt/ && java -jar my-app.jar > app.log 2>&1 &
