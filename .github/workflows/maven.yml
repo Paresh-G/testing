@@ -1,0 +1,22 @@
+name: My First Workflow
+
+on: push
+
+jobs:
+  stage1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stage 1 Echo
+        run: echo "Hello from Stage 1"
+
+  stage2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stage 2 Echo
+        run: echo "Hello from Stage 2"
+
+  stage3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stage 3 Echo
+        run: echo "Hello from Stage 3"
