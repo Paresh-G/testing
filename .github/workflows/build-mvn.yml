@@ -32,7 +32,7 @@ jobs:
     needs: package
     steps:
       - name: remove old artifact
-        run: sudo cd /opt/ && sudo rm -f *
+        run: cd /opt/ && sudo rm -f *
 
   deliver:
     runs-on: self-hosted
@@ -46,5 +46,5 @@ jobs:
     needs: deliver
     steps:
       - name: deploy artifact
-        run: sudo /opt/ && java -jar my-app.jar > app.log 2>&1 &
+        run:  java -jar my-app.jar > app.log 2>&1 &
         
