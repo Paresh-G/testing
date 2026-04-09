@@ -13,10 +13,10 @@ jobs:
       # 1. Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      # 2. Verify Java
+        
+     # 2. Verify Java
       - name: Check Java Version
-        run: java -version
+        run: java -
 
       # 3. Build with Maven
       - name: Build Project
@@ -24,5 +24,5 @@ jobs:
 
       # 4. copy artifact to /opt/app
       - name: delever artifact
-        run: sudo cp /home/ubuntu/actions-runner/_work/testing/testing/target/*.jar /opt/
+        run: sudo cp /target/*.jar /opt/
         
