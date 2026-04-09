@@ -41,9 +41,16 @@ jobs:
       - name: delever artifact
         run: sudo cp /home/ubuntu/actions-runner/_work/testing/testing/target/*.jar /opt/my-app.jar
 
-  deploy:
+  deliver_s3:
     runs-on: self-hosted
     needs: deliver
+    steps:
+      - name: delever artifact to s3
+        run: aws s3 cp /home/ubuntu/actions-runner/_work/testing/testing/target/*.jar s3://sayli-ankush/my-app_$(date +%Y-%m-%d-%T).jar
+
+  deploy:
+    runs-on: self-hosted
+    needs: deliver_s3
     steps:
       - name: deploy artifact
         run:  sudo bash -c "java -jar /opt/my-app.jar > /opt/app.log 2>&1"
