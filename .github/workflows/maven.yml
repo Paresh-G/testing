@@ -19,3 +19,12 @@ jobs:
         cache: maven
     - name: validate with Maven
       run: mvn validate
+
+    - name: compile with Maven
+      run: mvn compile
+
+    - name: test with Maven
+      run: mvn test
+
+    - name: package with Maven
+      run: mvn package
